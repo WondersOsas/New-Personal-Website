@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>About | Tech-Tezo | Wonders Osas Portfolio</title>
+  <meta name="description" content="Learn more about the design and development philosophy behind Tech-Tezo." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Animated Background -->
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="floating-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <span class="loader-letter">T</span>
+        <span class="loader-letter">T</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+      <p class="loader-text">Crafting Excellence</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="logo">
+        <span class="logo-text-wrapper"><span class="logo-text">Tech-</span><span class="logo-accent">Tezo</span></span>
+        <span class="logo-subtext">Wonders Osas Portfolio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="about.html" class="nav-link active">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+      </div>
+    </nav>
+  </header>
+
+  <main style="padding-top: 8rem; min-height: 80vh;">
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">About Me</span>
+          <h2 class="section-title">Design-led <span class="gradient-text">digital creator</span></h2>
+          <p class="section-subtitle">I create digital experiences that feel clear, elegant, and built to perform.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; margin-top: 4rem;" class="reveal">
+          <div class="service-card" style="padding: 3rem;">
+            <h3 style="margin-bottom: 1.5rem; font-size: 1.8rem; background: linear-gradient(135deg, var(--text-primary), var(--accent)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;">My Philosophy</h3>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
+              My work blends visual storytelling, modern development, and a careful eye for detail. The goal is always the same: help businesses present themselves with confidence and build trust from the very first interaction.
+            </p>
+            <p style="color: var(--text-secondary); font-size: 1.1rem; line-height: 1.8;">
+              Every line of code is written with performance and search engine optimization in mind, ensuring your digital presence is not only beautiful but highly effective.
+            </p>
+          </div>
+
+          <div style="display: flex; flex-direction: column; gap: 2rem;">
+            <div class="service-card" style="padding: 2rem;">
+              <strong style="display: block; font-size: 1.25rem; color: var(--accent); margin-bottom: 0.5rem;">Design-led</strong>
+              <span style="color: var(--text-secondary);">Every project starts with absolute clarity, tailored intention, and custom wireframing.</span>
+            </div>
+            <div class="service-card" style="padding: 2rem;">
+              <strong style="display: block; font-size: 1.25rem; color: var(--gold); margin-bottom: 0.5rem;">Fast & Modern</strong>
+              <span style="color: var(--text-secondary);">Clean semantic HTML, modern CSS styling, and responsive layouts built for all device screens.</span>
+            </div>
+            <div class="service-card" style="padding: 2rem;">
+              <strong style="display: block; font-size: 1.25rem; color: var(--accent); margin-bottom: 0.5rem;">Built to Convert</strong>
+              <span style="color: var(--text-secondary);">Structured layout, clear content hierarchy, and seamless user experiences working together to drive action.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-text-wrapper"><span class="logo-text">Tech-</span><span class="logo-accent">Tezo</span></span>
+            <span class="logo-subtext">Wonders Osas Portfolio</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Crafting digital excellence.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+        </div>
+        <div class="footer-social">
+          <a href="#" aria-label="Twitter">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M18.333 5.625C17.708 5.875 17.083 6.042 16.417 6.125C17.083 5.708 17.625 5.083 17.958 4.333C17.333 4.708 16.667 4.958 15.958 5.083C15.375 4.5 14.625 4.125 13.792 4.125C12.208 4.125 10.875 5.458 10.875 7.042C10.875 7.333 10.917 7.625 10.992 7.875C8.208 7.75 5.708 6.208 4.042 3.875C3.708 4.5 3.5 5.208 3.5 5.958C3.5 7.208 4.125 8.333 5.083 9C4.417 9 3.75 8.792 3.167 8.5V8.542C3.167 10.125 4.417 11.417 5.958 11.75C5.625 11.833 5.292 11.875 4.958 11.875C4.708 11.875 4.458 11.833 4.208 11.792C4.708 13.292 6.125 14.375 7.833 14.417C6.375 15.542 4.625 16.167 2.75 16.167C2.375 16.167 2 16.125 1.625 16.083C3.333 17.208 5.333 17.833 7.5 17.833C13.792 17.833 17.083 12.5 17.083 7.667C17.083 7.5 17.083 7.333 17.083 7.167C17.667 6.708 18.208 6.208 18.667 5.625H18.333Z" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="LinkedIn">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M17.5 2.5H2.5C1.125 2.5 0 3.625 0 5V17.5C0 18.875 1.125 20 2.5 20H17.5C18.875 20 20 18.875 20 17.5V5C20 3.625 18.875 2.5 17.5 2.5ZM6.25 17.5H3.75V9.375H6.25V17.5ZM5 8.125C4.125 8.125 3.375 7.375 3.375 6.5C3.375 5.625 4.125 4.875 5 4.875C5.875 4.875 6.625 5.625 6.625 6.5C6.625 7.375 5.875 8.125 5 8.125ZM16.25 17.5H13.75V13.125C13.75 12.125 13.125 11.375 12.125 11.375C11.125 11.375 10.5 12.125 10.5 13.125V17.5H8V9.375H10.5V10.625C10.875 9.875 11.625 9.375 12.625 9.375C14.625 9.375 16.25 10.625 16.25 13.125V17.5Z" fill="currentColor"/>
+            </svg>
+          </a>
+          <a href="#" aria-label="GitHub">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+              <path d="M10 0C4.477 0 0 4.477 0 10C0 14.418 3.134 18.054 7.368 19.478C7.868 19.568 8.034 19.268 8.034 19.008C8.034 18.768 8.028 18.088 8.022 17.168C5.334 17.718 4.724 15.568 4.724 15.568C4.184 14.168 3.384 13.798 3.384 13.798C2.384 13.048 3.384 13.058 3.384 13.058C4.384 13.138 4.924 14.168 4.924 14.168C5.784 15.908 7.384 15.368 8.054 15.068C8.144 14.348 8.424 13.868 8.734 13.568C6.724 13.268 4.624 12.368 4.624 8.568C4.624 7.368 5.084 6.368 5.784 5.568C5.684 5.268 5.284 4.068 5.884 2.568C5.884 2.568 6.784 2.268 8.034 3.568C8.784 3.268 9.584 3.118 10.384 3.108C11.184 3.118 11.984 3.268 12.734 3.568C13.984 2.268 14.884 2.568 14.884 2.568C15.484 4.068 15.084 5.268 14.984 5.568C15.684 6.368 16.134 7.368 16.134 8.568C16.134 12.378 14.034 13.268 12.034 13.558C12.384 13.918 12.684 14.568 12.784 15.468C12.884 16.568 12.784 18.068 12.784 18.068C12.784 18.268 12.944 18.568 13.384 18.468C17.634 17.048 20.634 13.418 20.634 9.008C20.634 4.478 16.568 0.5 10.384 0.5L10 0Z" fill="currentColor"/>
+            </svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Tech-Tezo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
