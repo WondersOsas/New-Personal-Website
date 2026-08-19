@@ -147,64 +147,180 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
-  // Particle Canvas System
+  // Particle Canvas System (Constellation Network)
   const canvas = document.getElementById('particleCanvas');
   if (canvas) {
     const ctx = canvas.getContext('2d');
     let particles = [];
     let width = canvas.width = window.innerWidth;
     let height = canvas.height = window.innerHeight;
+    let mouse = { x: null, y: null, radius: 150 };
 
     window.addEventListener('resize', () => {
       width = canvas.width = window.innerWidth;
       height = canvas.height = window.innerHeight;
     });
 
+    window.addEventListener('mousemove', (e) => {
+      mouse.x = e.clientX;
+      mouse.y = e.clientY;
+    });
+
+    window.addEventListener('mouseleave', () => {
+      mouse.x = null;
+      mouse.y = null;
+    });
+
     class Particle {
       constructor() {
-        this.reset();
-      }
-
-      reset() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.radius = Math.random() * 1.5 + 0.5;
-        this.vx = (Math.random() - 0.5) * 0.3;
-        this.vy = (Math.random() - 0.5) * 0.3;
-        this.alpha = Math.random() * 0.4 + 0.1;
+        this.radius = Math.random() * 2 + 1;
+        this.vx = (Math.random() - 0.5) * 0.4;
+        this.vy = (Math.random() - 0.5) * 0.4;
       }
 
       update() {
+        // Move particle
         this.x += this.vx;
         this.y += this.vy;
 
-        if (this.x < 0 || this.x > width || this.y < 0 || this.y > height) {
-          this.reset();
+        // Bounce off walls
+        if (this.x < 0 || this.x > width) this.vx *= -1;
+        if (this.y < 0 || this.y > height) this.vy *= -1;
+
+        // Mouse attraction/repulsion interaction
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = mouse.x - this.x;
+          const dy = mouse.y - this.y;
+          const dist = Math.hypot(dx, dy);
+          
+          if (dist < mouse.radius) {
+            // Soft attraction to mouse
+            const force = (mouse.radius - dist) / mouse.radius;
+            this.x += (dx / dist) * force * 0.6;
+            this.y += (dy / dist) * force * 0.6;
+          }
         }
       }
 
       draw() {
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(125, 200, 255, ${this.alpha})`;
+        ctx.fillStyle = 'rgba(59, 130, 246, 0.4)';
         ctx.fill();
       }
     }
 
     // Initialize particles
-    const particleCount = Math.min(60, Math.floor((width * height) / 25000));
+    const particleCount = Math.min(80, Math.floor((width * height) / 18000));
     for (let i = 0; i < particleCount; i++) {
       particles.push(new Particle());
     }
 
     const animateParticles = () => {
       ctx.clearRect(0, 0, width, height);
+
+      // Update and draw particles
       particles.forEach((p) => {
         p.update();
         p.draw();
       });
+
+      // Connect particles
+      for (let i = 0; i < particles.length; i++) {
+        for (let j = i + 1; j < particles.length; j++) {
+          const dx = particles[i].x - particles[j].x;
+          const dy = particles[i].y - particles[j].y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < 100) {
+            const alpha = (100 - dist) / 100 * 0.15;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(particles[j].x, particles[j].y);
+            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
+            ctx.lineWidth = 0.8;
+            ctx.stroke();
+          }
+        }
+
+        // Draw connections to mouse
+        if (mouse.x !== null && mouse.y !== null) {
+          const dx = particles[i].x - mouse.x;
+          const dy = particles[i].y - mouse.y;
+          const dist = Math.hypot(dx, dy);
+
+          if (dist < mouse.radius) {
+            const alpha = (mouse.radius - dist) / mouse.radius * 0.18;
+            ctx.beginPath();
+            ctx.moveTo(particles[i].x, particles[i].y);
+            ctx.lineTo(mouse.x, mouse.y);
+            ctx.strokeStyle = `rgba(59, 130, 246, ${alpha})`;
+            ctx.lineWidth = 1;
+            ctx.stroke();
+          }
+        }
+      }
+
       requestAnimationFrame(animateParticles);
     };
     animateParticles();
+  }
+
+  // Magnetic Buttons Animation
+  const magneticButtons = document.querySelectorAll('.btn');
+  magneticButtons.forEach((btn) => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+
+      btn.style.transform = `translate(${x * 0.35}px, ${y * 0.35}px)`;
+    });
+
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0px, 0px)';
+    });
+  });
+
+  // Stats Counter Animation
+  const stats = document.querySelectorAll('.stat-number');
+  if (stats.length > 0) {
+    const animateCounter = (element) => {
+      const target = parseInt(element.getAttribute('data-count'), 10);
+      const duration = 2000; // 2 seconds
+      const startTime = performance.now();
+
+      const updateCount = (currentTime) => {
+        const elapsedTime = currentTime - startTime;
+        const progress = Math.min(elapsedTime / duration, 1);
+        
+        // Easing function outQuad
+        const easeProgress = progress * (2 - progress);
+        const currentValue = Math.floor(easeProgress * target);
+        
+        element.textContent = currentValue;
+
+        if (progress < 1) {
+          requestAnimationFrame(updateCount);
+        } else {
+          element.textContent = target;
+        }
+      };
+
+      requestAnimationFrame(updateCount);
+    };
+
+    const statsObserver = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          animateCounter(entry.target);
+          statsObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    stats.forEach((stat) => statsObserver.observe(stat));
   }
 });

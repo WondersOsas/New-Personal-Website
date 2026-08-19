@@ -5,21 +5,21 @@
 
 /* CSS Variables */
 :root {
-  --primary: #0e2f5a;
-  --primary-light: #1e4d7b;
-  --accent: #7dc8ff;
-  --accent-glow: rgba(125, 200, 255, 0.4);
-  --gold: #f2b86b;
-  --gold-glow: rgba(242, 184, 107, 0.4);
-  --bg-dark: #0a1e3d;
-  --bg-medium: #0f2847;
-  --text-primary: #ffffff;
-  --text-secondary: rgba(255, 255, 255, 0.75);
-  --text-muted: rgba(255, 255, 255, 0.5);
-  --border: rgba(255, 255, 255, 0.1);
-  --border-light: rgba(255, 255, 255, 0.2);
-  --shadow-lg: 0 30px 80px rgba(0, 0, 0, 0.5);
-  --shadow-glow: 0 0 60px rgba(125, 200, 255, 0.3);
+  --primary: #1e40af;      /* Rich Dark Blue */
+  --primary-light: #2563eb;/* Electric Blue */
+  --accent: #3b82f6;       /* Vibrant Sky Blue */
+  --accent-glow: rgba(59, 130, 246, 0.15);
+  --gold: #0f172a;         /* Deep Slate Black */
+  --gold-glow: rgba(15, 23, 42, 0.1);
+  --bg-dark: #cbd5e1;      /* Light Grey / Silver (20% Darker than White) */
+  --bg-medium: #ffffff;    /* Pure White for Card contrast */
+  --text-primary: #0f172a; /* Slate Black */
+  --text-secondary: #334155;/* Dark Slate Grey */
+  --text-muted: #475569;   /* Slate Grey */
+  --border: rgba(15, 23, 42, 0.12);
+  --border-light: rgba(15, 23, 42, 0.18);
+  --shadow-lg: 0 20px 50px rgba(15, 23, 42, 0.15);
+  --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.08);
 }
 
 /* Reset & Base */
@@ -83,9 +83,9 @@ body {
   position: fixed;
   inset: 0;
   background: 
-    radial-gradient(circle at 20% 50%, rgba(125, 200, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 80%, rgba(242, 184, 107, 0.1) 0%, transparent 50%),
-    radial-gradient(circle at 40% 20%, rgba(14, 47, 90, 0.2) 0%, transparent 40%),
+    radial-gradient(circle at 20% 50%, rgba(96, 165, 250, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(96, 165, 250, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(30, 64, 175, 0.15) 0%, transparent 40%),
     linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-medium) 100%);
   z-index: -3;
   animation: gradientShift 15s ease infinite;
@@ -253,14 +253,14 @@ body {
   padding: 1.2rem 0;
   transition: all 0.4s ease;
   backdrop-filter: blur(20px);
-  background: rgba(10, 30, 61, 0.75);
+  background: rgba(255, 255, 255, 0.7);
   border-bottom: 1px solid var(--border);
 }
 
 .header.scrolled {
   padding: 0.8rem 0;
-  background: rgba(10, 30, 61, 0.95);
-  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.05);
 }
 
 .nav {
@@ -486,8 +486,8 @@ body {
 
 .btn-primary {
   background: linear-gradient(135deg, var(--accent), var(--primary-light));
-  color: var(--bg-dark);
-  box-shadow: 0 10px 30px rgba(125, 200, 255, 0.3);
+  color: #ffffff;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.2);
 }
 
 .btn-primary::before {
@@ -738,7 +738,7 @@ body {
 
 .service-card {
   padding: 2.5rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-medium);
   border: 1px solid var(--border);
   border-radius: 1.5rem;
   backdrop-filter: blur(10px);
@@ -859,22 +859,24 @@ body {
 }
 
 .scrolling-iframe {
-  width: 100%;
-  height: 300vh;
+  width: 1200px;
+  height: 1800px;
   border: none;
   pointer-events: none;
   position: absolute;
   top: 0;
-  left: 0;
-  animation: scrollIframe 25s linear infinite alternate;
+  left: 50%;
+  transform-origin: top center;
+  transform: translateX(-50%) scale(0.28);
+  animation: scrollIframe 20s linear infinite alternate;
 }
 
 @keyframes scrollIframe {
   0% {
-    transform: translateY(0);
+    transform: translateX(-50%) scale(0.28) translateY(0);
   }
   100% {
-    transform: translateY(-50%);
+    transform: translateX(-50%) scale(0.28) translateY(-1000px);
   }
 }
 
@@ -927,7 +929,7 @@ body {
 .work-card {
   border-radius: 1.5rem;
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-medium);
   border: 1px solid var(--border);
   backdrop-filter: blur(10px);
   transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
@@ -1079,7 +1081,7 @@ body {
 
 .testimonial-card {
   padding: 2.5rem;
-  background: rgba(255, 255, 255, 0.03);
+  background: var(--bg-medium);
   border: 1px solid var(--border);
   border-radius: 1.5rem;
   backdrop-filter: blur(10px);
@@ -1237,7 +1239,7 @@ body {
 .footer {
   padding: 3rem 0 2rem;
   border-top: 1px solid var(--border);
-  background: rgba(10, 30, 61, 0.5);
+  background: rgba(255, 255, 255, 0.8);
   backdrop-filter: blur(10px);
 }
 
@@ -1360,6 +1362,45 @@ body {
   50% { transform: translateY(-20px) rotate(180deg); }
 }
 
+/* Custom Responsive Grids */
+.about-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 4rem;
+  align-items: start;
+  margin-top: 4rem;
+}
+
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 4rem;
+  align-items: start;
+  margin-top: 4rem;
+}
+
+@media (max-width: 768px) {
+  .about-grid,
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    margin-top: 2rem;
+  }
+  .scrolling-iframe {
+    transform: translateX(-50%) scale(0.23);
+    animation: scrollIframeMobile 20s linear infinite alternate;
+  }
+}
+
+@keyframes scrollIframeMobile {
+  0% {
+    transform: translateX(-50%) scale(0.23) translateY(0);
+  }
+  100% {
+    transform: translateX(-50%) scale(0.23) translateY(-1000px);
+  }
+}
+
 /* Responsive */
 @media (max-width: 968px) {
   .hero-container {
@@ -1396,7 +1437,7 @@ body {
     width: 80%;
     max-width: 400px;
     height: 100vh;
-    background: rgba(10, 30, 61, 0.98);
+    background: rgba(255, 255, 255, 0.98);
     backdrop-filter: blur(20px);
     flex-direction: column;
     padding: 6rem 2rem 2rem;
