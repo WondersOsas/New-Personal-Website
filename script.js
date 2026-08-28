@@ -323,4 +323,43 @@ document.addEventListener('DOMContentLoaded', () => {
 
     stats.forEach((stat) => statsObserver.observe(stat));
   }
+
+  // Copyright & Content Piracy Protection
+  document.addEventListener('contextmenu', (e) => {
+    e.preventDefault();
+    console.warn("Copyright Protection: Right-click is disabled to protect visual assets from piracy.");
+  });
+
+  document.addEventListener('keydown', (e) => {
+    // Disable Inspect Element key shortcuts (F12, Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U)
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J' || e.key === 'i' || e.key === 'j')) ||
+      (e.ctrlKey && (e.key === 'u' || e.key === 'U'))
+    ) {
+      e.preventDefault();
+      console.warn("Security System: Source code inspection shortcuts are restricted to prevent copying.");
+    }
+  });
+
+  // Scroll Indicator Click Action
+  const scrollIndicator = document.getElementById('scrollIndicator');
+  if (scrollIndicator) {
+    scrollIndicator.addEventListener('click', () => {
+      const servicesSection = document.getElementById('services');
+      if (servicesSection) {
+        servicesSection.scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // Premium Console Banner Warning
+  console.log(
+    "%cTech-Tezo Security System Active",
+    "color: #3b82f6; font-size: 16px; font-weight: bold; padding: 4px;"
+  );
+  console.log(
+    "%cAll rights reserved. Code, designs, and content are protected under international copyright laws.",
+    "color: #475569; font-size: 12px;"
+  );
 });

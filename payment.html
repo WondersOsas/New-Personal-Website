@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Payment Methods | Tech-Tezo</title>
+  <meta name="description" content="Direct bank transfer details for Tech-Tezo premium web development projects." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .payment-card {
+      background: var(--bg-medium);
+      border: 1px solid var(--border-light);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      max-width: 600px;
+      margin: 0 auto 3rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .bank-detail-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.25rem 0;
+      border-bottom: 1px solid var(--border);
+    }
+    .bank-detail-item:last-child {
+      border-bottom: none;
+    }
+    .detail-label {
+      font-weight: 600;
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+    .detail-value {
+      font-weight: 700;
+      color: var(--text-primary);
+      font-size: 1.1rem;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .copy-btn {
+      background: rgba(37, 99, 235, 0.1);
+      border: none;
+      color: var(--primary-light);
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .copy-btn:hover {
+      background: var(--primary-light);
+      color: #ffffff;
+    }
+    .confirm-section {
+      text-align: center;
+      margin-top: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Animated Background -->
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="floating-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <span class="loader-letter">T</span>
+        <span class="loader-letter">T</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+      <p class="loader-text">Secure Checkout</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="logo">
+        <span class="logo-text-wrapper"><span class="logo-text">Tech-</span><span class="logo-accent">Tezo</span></span>
+        <span class="logo-subtext">Wonders Osas Portfolio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="payment.html" class="nav-link active">Payment</a>
+      </div>
+    </nav>
+  </header>
+
+  <main style="padding-top: 8rem; min-height: 80vh;">
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Direct Transfer</span>
+          <h2 class="section-title">Business Account <span class="gradient-text">Details</span></h2>
+          <p class="section-subtitle">Please make direct transfers to the official business account listed below.</p>
+        </div>
+
+        <div class="payment-card reveal">
+          <div class="bank-detail-item">
+            <span class="detail-label">Bank Name</span>
+            <span class="detail-value">PAGA Bank</span>
+          </div>
+          <div class="bank-detail-item">
+            <span class="detail-label">Account Number</span>
+            <span class="detail-value">
+              <span id="accountNumber">3274505804</span>
+              <button class="copy-btn" onclick="copyAccount()">Copy</button>
+            </span>
+          </div>
+          <div class="bank-detail-item">
+            <span class="detail-label">Account Name</span>
+            <span class="detail-value">Wonders Inabelu</span>
+          </div>
+          
+          <div class="confirm-section">
+            <p style="margin-bottom: 1.5rem; color: var(--text-secondary);">
+              After making the transfer, please send proof of payment directly to our VA to confirm your project slot, or communicate with us directly on Whatsapp.
+            </p>
+            <a href="https://wa.me/2348055235635?text=Hello%20Tech-Tezo,%20I%20have%20made%20a%20payment%20transfer%20and%20want%20to%20confirm." target="_blank" rel="noopener" class="btn btn-primary" style="justify-content: center; width: 100%;">
+              <span>Confirm on WhatsApp</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-text-wrapper"><span class="logo-text">Tech-</span><span class="logo-accent">Tezo</span></span>
+            <span class="logo-subtext">Wonders Osas Portfolio</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Crafting digital excellence.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="reviews.html">Reviews</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Tech-Tezo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="zie-chatbot.js"></script>
+  <script>
+    function copyAccount() {
+      const accNum = document.getElementById('accountNumber').textContent;
+      navigator.clipboard.writeText(accNum).then(() => {
+        const btn = document.querySelector('.copy-btn');
+        btn.textContent = 'Copied!';
+        btn.style.background = '#10b981';
+        btn.style.color = '#ffffff';
+        setTimeout(() => {
+          btn.textContent = 'Copy';
+          btn.style.background = 'rgba(37, 99, 235, 0.1)';
+          btn.style.color = 'var(--primary-light)';
+        }, 2000);
+      });
+    }
+  </script>
+</body>
+</html>

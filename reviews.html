@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Client Reviews | Tech-Tezo</title>
+  <meta name="description" content="Read reviews from clients of Tech-Tezo or submit your feedback on work done." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .reviews-container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      margin-bottom: 4rem;
+    }
+    .review-form-card {
+      background: var(--bg-medium);
+      border: 1px solid var(--border-light);
+      border-radius: 1.5rem;
+      padding: 2.5rem;
+      box-shadow: var(--shadow-lg);
+    }
+    .form-group {
+      margin-bottom: 1.5rem;
+    }
+    .form-group label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      color: var(--text-primary);
+    }
+    .form-control {
+      width: 100%;
+      padding: 0.75rem 1rem;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      font-family: inherit;
+      font-size: 0.95rem;
+      transition: border-color 0.2s ease;
+    }
+    .form-control:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .rating-select {
+      display: flex;
+      gap: 10px;
+      margin-top: 5px;
+    }
+    .star-option {
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #cbd5e1;
+      transition: color 0.2s ease;
+    }
+    .star-option.selected {
+      color: #fbbf24;
+    }
+    .reviews-list-section {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+    @media (max-width: 968px) {
+      .reviews-container {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Custom Cursor -->
+  <div class="cursor" id="cursor"></div>
+  <div class="cursor-follower" id="cursorFollower"></div>
+
+  <!-- Animated Background -->
+  <div class="bg-gradient"></div>
+  <div class="bg-grid"></div>
+  <div class="floating-orbs">
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+    <div class="orb orb-4"></div>
+  </div>
+  <canvas id="particleCanvas"></canvas>
+
+  <!-- Loading Screen -->
+  <div class="loader" id="loader">
+    <div class="loader-content">
+      <div class="loader-logo">
+        <span class="loader-letter">T</span>
+        <span class="loader-letter">T</span>
+      </div>
+      <div class="loader-bar">
+        <div class="loader-progress"></div>
+      </div>
+      <p class="loader-text">Loading Reviews</p>
+    </div>
+  </div>
+
+  <!-- Navigation -->
+  <header class="header">
+    <nav class="nav container">
+      <a href="index.html" class="logo">
+        <span class="logo-text-wrapper"><span class="logo-text">Tech-</span><span class="logo-accent">Tezo</span></span>
+        <span class="logo-subtext">Wonders Osas Portfolio</span>
+      </a>
+      <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <div class="nav-menu" id="navMenu">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="work.html" class="nav-link">Work</a>
+        <a href="about.html" class="nav-link">About</a>
+        <a href="contact.html" class="nav-link">Contact</a>
+        <a href="reviews.html" class="nav-link active">Reviews</a>
+      </div>
+    </nav>
+  </header>
+
+  <main style="padding-top: 8rem; min-height: 80vh;">
+    <section class="section">
+      <div class="container">
+        <div class="section-header reveal">
+          <span class="section-tag">Feedback</span>
+          <h2 class="section-title">Client <span class="gradient-text">Reviews</span></h2>
+          <p class="section-subtitle">Read what clients say about Tech-Tezo, or submit a new review of your project.</p>
+        </div>
+
+        <div class="reviews-container">
+          <!-- Left Column: Submit a Review Form -->
+          <div class="review-form-card reveal">
+            <h3 style="margin-bottom: 1.5rem; font-weight: 700;">Leave a Review</h3>
+            <form id="reviewForm">
+              <div class="form-group">
+                <label for="clientName">Your Name</label>
+                <input type="text" id="clientName" class="form-control" placeholder="e.g. John Doe" required />
+              </div>
+              <div class="form-group">
+                <label for="projectType">Project Delivered</label>
+                <input type="text" id="projectType" class="form-control" placeholder="e.g. E-Commerce Website" required />
+              </div>
+              <div class="form-group">
+                <label>Rating</label>
+                <div class="rating-select" id="ratingSelect">
+                  <span class="star-option" data-value="1">&#9733;</span>
+                  <span class="star-option" data-value="2">&#9733;</span>
+                  <span class="star-option" data-value="3">&#9733;</span>
+                  <span class="star-option" data-value="4">&#9733;</span>
+                  <span class="star-option" data-value="5">&#9733;</span>
+                </div>
+              </div>
+              <div class="form-group">
+                <label for="reviewText">Review Details</label>
+                <textarea id="reviewText" rows="5" class="form-control" placeholder="Describe your experience working with Tech-Tezo..." required></textarea>
+              </div>
+              
+              <button type="submit" class="btn btn-primary" style="width: 100%; justify-content: center;">
+                <span>Submit & Notify VA</span>
+              </button>
+            </form>
+          </div>
+
+          <!-- Right Column: Existing Reviews Showcase -->
+          <div class="reviews-list-section reveal">
+            <h3 style="margin-bottom: 0.5rem; font-weight: 700;">Recent Client Feedback</h3>
+            
+            <div class="testimonial-card">
+              <div class="testimonial-content" style="padding: 0;">
+                <div style="color: #fbbf24; margin-bottom: 0.5rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"Tech-Tezo delivered our agency website on time. The performance scores are incredible."</p>
+                <div class="testimonial-author" style="margin-top: 1rem;">
+                  <div class="author-info">
+                    <strong>Sarah Mitchell</strong>
+                    <span>Founder, DesignHub</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="testimonial-card">
+              <div class="testimonial-content" style="padding: 0;">
+                <div style="color: #fbbf24; margin-bottom: 0.5rem;">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"The dashboard system is extremely fast and responsive. I've received nothing but positive client feedback."</p>
+                <div class="testimonial-author" style="margin-top: 1rem;">
+                  <div class="author-info">
+                    <strong>John Davidson</strong>
+                    <span>CEO, TechVentures</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-brand">
+          <a href="index.html" class="logo">
+            <span class="logo-text-wrapper"><span class="logo-text">Tech-</span><span class="logo-accent">Tezo</span></span>
+            <span class="logo-subtext">Wonders Osas Portfolio</span>
+          </a>
+          <p style="margin-top: 0.75rem;">Crafting digital excellence.</p>
+        </div>
+        <div class="footer-links">
+          <a href="index.html">Home</a>
+          <a href="work.html">Work</a>
+          <a href="about.html">About</a>
+          <a href="contact.html">Contact</a>
+          <a href="payment.html">Payment</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; <span id="year"></span> Tech-Tezo. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+  <script src="zie-chatbot.js"></script>
+  <script>
+    // Rating star selection logic
+    const stars = document.querySelectorAll('.star-option');
+    let selectedRating = 5;
+
+    // Default select 5 stars
+    updateStars(5);
+
+    stars.forEach(star => {
+      star.addEventListener('click', () => {
+        selectedRating = parseInt(star.getAttribute('data-value'), 10);
+        updateStars(selectedRating);
+      });
+    });
+
+    function updateStars(rating) {
+      stars.forEach(star => {
+        const val = parseInt(star.getAttribute('data-value'), 10);
+        if (val <= rating) {
+          star.classList.add('selected');
+        } else {
+          star.classList.remove('selected');
+        }
+      });
+    }
+
+    // Form submission triggers WhatsApp pre-filled text
+    document.getElementById('reviewForm').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const name = document.getElementById('clientName').value;
+      const project = document.getElementById('projectType').value;
+      const review = document.getElementById('reviewText').value;
+
+      const ratingStars = '⭐'.repeat(selectedRating);
+      const text = `*New Website Review!*%0A%0A*Client:* ${encodeURIComponent(name)}%0A*Project:* ${encodeURIComponent(project)}%0A*Rating:* ${ratingStars}%0A*Review:* ${encodeURIComponent(review)}`;
+      
+      const whatsappURL = `https://wa.me/2348055235635?text=${text}`;
+      window.open(whatsappURL, '_blank');
+    });
+  </script>
+</body>
+</html>

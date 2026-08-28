@@ -1522,6 +1522,56 @@ body {
   }
 }
 
+/* Fiverr Stars Badge */
+.fiverr-stars-badge {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-top: 0.5rem;
+}
+.fiverr-stars {
+  color: #fbbf24;
+  font-size: 1.25rem;
+  letter-spacing: 2px;
+  text-shadow: 0 0 10px rgba(251, 191, 36, 0.6), 0 0 20px rgba(251, 191, 36, 0.4);
+  animation: stars-shine 2s infinite ease-in-out;
+}
+.fiverr-badge-text {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+@keyframes stars-shine {
+  0%, 100% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 2px rgba(251, 191, 36, 0.5));
+    transform: scale(1);
+  }
+  50% {
+    opacity: 1;
+    filter: drop-shadow(0 0 8px rgba(251, 191, 36, 0.9));
+    transform: scale(1.05);
+  }
+}
+
+/* Mobile Spacing Optimizations */
+@media (max-width: 768px) {
+  .section {
+    padding: 5rem 0 !important; /* Give reasonable breathing room */
+  }
+  .container {
+    padding: 0 1.5rem !important;
+  }
+  .services-grid, .work-grid, .testimonials-slider {
+    gap: 2.5rem !important; /* Increase gap so they aren't jam-packed */
+  }
+  .service-card, .work-card, .testimonial-card {
+    padding: 2rem 1.5rem !important;
+  }
+}
+
 /* Selection */
 ::selection {
   background: var(--accent);
